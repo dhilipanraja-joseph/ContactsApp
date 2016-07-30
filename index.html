@@ -28,19 +28,21 @@
   </head>
   <body>
     <div class="container">
-      <h1>Contacts</h1>
+      <h1 id="titile">Contacts</h1><br>
       <form id="addContacts" class="col-sm-4">
         <div class="form-group">
-            <input type="text" class="form-control" id="firstname" placeholder="First Name" required>
-            <input type="text" class="form-control" id="lastname" placeholder="Last Name" required>
-            <input type="email" class="form-control" id="email" placeholder="Email">
-            <input type="number" class="form-control" id="phoneNum" placeholder="phone">
+            <input type="text" class="form-control" id="firstname" placeholder="First Name" required><br>
+            <input type="text" class="form-control" id="lastname" placeholder="Last Name" required><br>
+            <input type="email" class="form-control" id="email" placeholder="Email"><br>
+            <input type="number" class="form-control" id="phoneNum" placeholder="phone"><br>
         </div>
         <button type="submit" class="btn btn-success" name="button">Add Contact</button>
         <button class="btn btn-danger" type="reset">Reset</button>
       </form>
     </div>
     <div class="container">
+      <br>
+      <hr>
       <table id="contactTable" class="table">
         <thead>
           <tr>
@@ -89,9 +91,11 @@
       <form id="changeContact">
       <div class="modal-body">
         <div class="form-group">
-            <input type="text" class="form-control" id="eFirstname" placeholder="First Name" required>
-            <input type="text" class="form-control" id="eLastname" placeholder="Last Name" required>
-            <input type="email" class="form-control" id="eEmail" placeholder="Email">
+
+            <input type="text" class="form-control" id="eFirstname" placeholder="First Name" required><br>
+            <input type="text" class="form-control" id="eLastname" placeholder="Last Name" required><br>
+
+            <input type="email" class="form-control" id="eEmail" placeholder="Email"><br>
             <input type="number" class="form-control" id="ePhoneNum" placeholder="phone">
         </div>
       </div>
