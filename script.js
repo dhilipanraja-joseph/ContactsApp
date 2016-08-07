@@ -4,7 +4,6 @@ $(() => {
   // getContactsFromStorage();
   upDateTable();
   $('#addContacts').submit(addContact);
-  $('tr').on('click','td',editContact);
 
   // $('.edit').click(() => {
   //   console.log($(this));
@@ -85,7 +84,7 @@ function upDateTable(){
   // let ed = $('<span>').text('Edit').addClass('btn btn-danger btn-xs edit-btn');
   // $('.edit').append(ed);
   $('tbody').empty().append($trr);
-  // $('tr').on('click','span',editContact);
+  $('tr').on('click','td',editContact);
   $('form')[0].reset();
 
 }
