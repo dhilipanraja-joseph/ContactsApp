@@ -4,10 +4,8 @@ $(() => {
   // getContactsFromStorage();
   upDateTable();
   $('#addContacts').submit(addContact);
-  // $('tr').on('click','td',editContact);
-  let ed = $('<span>').text('Edit').addClass('btn btn-danger btn-xs edit-btn');
-  $('.edit').append(ed);
-  $('tr').on('click','span',editContact);
+  $('tr').on('click','td',editContact);
+
   // $('.edit').click(() => {
   //   console.log($(this));
   // });
@@ -52,6 +50,7 @@ function changeContact(e){
   // console.log(this);
   // cData.push(i);
   setDataToStorage(cData);
+  upDateTable();
 }
 
 function removeContact(i){
@@ -59,36 +58,49 @@ function removeContact(i){
   // console.log(rData.splice(i,1));
   rData.splice(i,1);
   setDataToStorage(rData);
+  upDateTable();
 }
 
 function upDateTable(){
   let uData = getDataFromStorage();
+  // console.log(uData);
   let $trr = uData.map(obj => {
     // console.log("udDate Fun", obj);
+    // let $tr = $('#template').clone();
+    // $tr.removeAttr('id');
     return createContactRow(toArray(obj));
+    // $tr.find('.firstName').text(obj[first-name]);
+    // $tr.find('.lastName').text(obj[last-name]);
+    // $tr.find('.emailAd').text(obj[email]);
+    // $tr.find('.phoneNum').text(obj[phone]);
+    // return $tr;
   });
   // let jo;
-  $trr.forEach(e => {
-    // jo = e;
-    $('tbody').append(e);
-    // console.log("e",e);
-  });
+  // $trr.forEach(e => {
+  //   // jo = e;
+  //   $('tbody').append(e);
+  //   // console.log("e",e);
+  // });
   // console.log("$tr", jo);
+  // let ed = $('<span>').text('Edit').addClass('btn btn-danger btn-xs edit-btn');
+  // $('.edit').append(ed);
+  $('tbody').empty().append($trr);
+  // $('tr').on('click','span',editContact);
+  $('form')[0].reset();
 
-  // $('tbody').append($tr);
 }
 
 function toObject(d){
 	return {
-		"first-name" : d[0],
-		"last-name" : d[1],
+		"first_name" : d[0],
+		"last_name" : d[1],
 		"email" : d[2],
 		"phone" : d[3]
 	}
 }
 
 function toArray(d){
-  return [d["first-name"],d["last-name"],d["email"],d["phone"]];
+  return [d["first_name"],d["last_name"],d["email"],d["phone"]];
 }
 
 // Array.prototype.toContactObj = function(d){
@@ -111,37 +123,48 @@ function getDataFromStorage(){
 
 function setDataToStorage(data){
   localStorage.storedContacts=JSON.stringify(data);
-  location.reload();
+  // location.reload();
 }
 
 function toContactTable(obj){
   let Data = getDataFromStorage();
   Data.push(obj);
   setDataToStorage(Data);
-  // upDateTable();
+  upDateTable();
 }
 
 
 function createContactRow(info) {
-  let $tr = $('#template').clone();
-  $tr.removeAttr('id');
+  let $tr = $('<tr>');
+
+  $tr.append(`<td>${info[0]}</td>`);
+  $tr.append(`<td>${info[1]}</td>`);
+  $tr.append(`<td>${info[2]}</td>`);
+  $tr.append(`<td>${info[3]}</td>`);
+
+  let ed = $('<span>').text('Edit').addClass('btn btn-danger btn-xs edit-btn');
+  let td = $('<td>').append(ed);
+  $tr.append(td);
+  // console.log(info);
+  // $tr.removeAttr('id');
   // let $trr = $('tr')[1];
-  let $td = $tr.children('td');
-  let newRow = $td.map((i,e) => {
-    // var c = info[i];
-    $(e).text(info[i]);
-    return e;
-    // console.log("addtd",e,"data", info[i]);
-  });
-  // return newRow;
-  // $('tbody').append($('<tr>').append(newRow));
-  // debugger;
-  // return $td;
-  // return $li;
-  let $tRow = $('<tr>').addClass("edit").append(newRow);
+  // ('td');
+  // let newRow = $td.map((i,e) => {
+  //   // var c = info[i];
+  //   $(e).text(info[i]);
+  //   return e;
+  //   // console.log("addtd",e,"data", info[i]);
+  // });
+  // // return newRow;
+  // // $('tbody').append($('<tr>').append(newRow));
+  // // debugger;
+  // // return $td;
+  // // return $li;
+  // let $tRow = $('<tr>').addClass("edit").append(newRow);
   // console.log("tRow:",$tRow);
   // debugger;
-  return $tRow;
+  return $tr;
+  // console.log($tr);
 }
 
 function addContact(e){
@@ -153,7 +176,7 @@ function addContact(e){
   let arr=[firstName,lastName,email,phone];
   toContactTable(toObject(arr));
   // document.getElementById("addContact").reset();
-  //upDateTable();
+  upDateTable();
   // createContact(arr);
 }
 
